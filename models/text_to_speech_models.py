@@ -16,19 +16,14 @@
 # THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 # DEALINGS IN THE SOFTWARE.
-from transformers import SpeechT5Processor, SpeechT5ForTextToSpeech, SpeechT5HifiGan
-from transformers import AutoProcessor, AutoModelForTextToWaveform
-from speechbrain.pretrained import EncoderClassifier
 from transformers import AutoProcessor, BarkModel
 from transformers import VitsModel, AutoTokenizer
-from torchaudio.transforms import Resample
-from datasets import load_dataset
 from elevenlabs import generate, voices
 from elevenlabs import set_api_key
-import torchaudio
 import random
 import torch
 import os
+import sys
 
 
 # Text-to-Speech Generation Using Suno Bark's Pretrained Model
@@ -85,3 +80,24 @@ class ElevenLabsTTS:
             return audio
         except Exception as e:
             print(f"An error occurred while processing the input audio in 11 Labs: {e}")
+
+class MeloTTS:
+    def __init__(self, model_path="myshell-ai/MeloTTS-English"):
+        self._setup_environment()
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        self.model = self._load_model()
+        self.speaker_ids = self.model.hps.data.spk2id
+
+    def _setup_environment(self):
+        if not os.path.isdir('MeloTTS'):
+            os.system('git clone https://github.com/myshell-ai/MeloTTS.git')
+            os.system('python -m unidic download')
+        sys.path.append('/content/MeloTTS/')
+
+    def _load_model(self):
+        from melo.api import TTS
+        return TTS(language='EN', device=str(self.device))
+
+    def generate_speech(self, text_input):
+        speech = self.model.tts_to_file(text_input, self.speaker_ids['EN-US'])
+        return speech

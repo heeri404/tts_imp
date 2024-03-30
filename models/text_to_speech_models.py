@@ -92,7 +92,7 @@ class MeloTTS:
         if not os.path.isdir('MeloTTS'):
             os.system('git clone https://github.com/myshell-ai/MeloTTS.git')
             os.system('python -m unidic download')
-        sys.path.append('/content/MeloTTS/')
+        sys.path.append('/root/tts_imp/MeloTTS/')
 
     def _load_model(self):
         from melo.api import TTS

@@ -219,6 +219,8 @@ class TextToSpeechService(AIModelService):
                 sampling_rate = 24000 
             elif model_name == "elevenlabs/eleven": 
                 sampling_rate = 44000
+            elif model_name == "myshell-ai/MeloTTS-English":
+                sampling_rate = 44000
             else:
                 sampling_rate = 16000
             torchaudio.save(output_path, src=audio_data_int, sample_rate=sampling_rate)

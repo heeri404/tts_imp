@@ -529,7 +529,7 @@ def main(config):
                     # Save the audio data as a .wav file
                     synapse.speech_output = speech  # Convert PyTorch tensor to a list
 
-                elif config.melo_model_path == "myshell-ai/MeloTTS-English":
+                elif config.model == "myshell-ai/MeloTTS-English":
                     synapse.model_name = config.model
                     synapse.speech_output = speech.tolist()
 

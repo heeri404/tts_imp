@@ -24,6 +24,13 @@ import random
 import torch
 import os
 import sys
+# Set the project root path
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+# Set the 'AudioSubnet' directory path
+audio_subnet_path = os.path.abspath(project_root)
+# Add the project root and 'AudioSubnet' directories to sys.path
+sys.path.insert(0, project_root)
+sys.path.insert(0, audio_subnet_path)
 
 
 # Text-to-Speech Generation Using Suno Bark's Pretrained Model
@@ -92,7 +99,7 @@ class MeloTTS:
         if not os.path.isdir('MeloTTS'):
             os.system('git clone https://github.com/myshell-ai/MeloTTS.git')
             os.system('python -m unidic download')
-        sys.path.append('/root/tts_imp/MeloTTS/')
+        sys.path.append(audio_subnet_path + 'MeloTTS/')
 
     def _load_model(self):
         from melo.api import TTS

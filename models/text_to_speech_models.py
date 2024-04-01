@@ -88,7 +88,8 @@ class MeloTTS:
             os.system('git clone https://github.com/myshell-ai/MeloTTS.git')
             os.system('python -m unidic download')
         sys.path.append('/root/tts_imp/MeloTTS/')
-        bt.logging.info(audio_subnet_path)
+        bt.logging.info(f'..........audio subnet path{audio_subnet_path}')
+        bt.logging.info(f'..........project root path{project_root}')
 
     def _load_model(self):
         from melo.api import TTS

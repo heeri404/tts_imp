@@ -145,7 +145,7 @@ def main(config):
 
         elif config.melo_model_path or config.model == "myshell-ai/MeloTTS-English":
             model_path = config.melo_model_path if config.melo_model_path else config.model
-            tts_models = MeloTTS(model_path=model_path)
+            tts_models = MeloTTS()
             bt.logging.info(f"Using the Melo TTS model from: {model_path}")
 
         elif config.bark_model_path or config.model == "suno/bark":

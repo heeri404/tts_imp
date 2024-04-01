@@ -79,7 +79,7 @@ class ElevenLabsTTS:
             print(f"An error occurred while processing the input audio in 11 Labs: {e}")
 
 class MeloTTS:
-    def _init_(self, model_path="myshell-ai/MeloTTS-English"):
+    def __init__(self):
         bt.logging.info(f'.................Initializing MeloTTS model')
         self._setup_environment()
         bt.logging.info(f'.................Environment setup complete')

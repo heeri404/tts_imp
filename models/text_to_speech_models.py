@@ -80,7 +80,6 @@ class ElevenLabsTTS:
 
 class MeloTTS:
     def _init_(self, model_path="myshell-ai/MeloTTS-English"):
-        self.model_path = model_path
         self._setup_environment()
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model = self._load_model()
@@ -95,7 +94,7 @@ class MeloTTS:
 
         # Dynamically add the MeloTTS directory to sys.path
         sys.path.append(melo_dir)
-        bt.logging.info(f'Added MeloTTS directory to sys.path: {melo_dir}')
+        bt.logging.info(f'.................Added MeloTTS directory to sys.path: {melo_dir}')
 
     def _load_model(self):
         from melo.api import TTS

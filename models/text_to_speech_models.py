@@ -80,17 +80,25 @@ class ElevenLabsTTS:
 
 class MeloTTS:
     def _init_(self, model_path="myshell-ai/MeloTTS-English"):
+        bt.logging.info(f'.................Initializing MeloTTS model')
         self._setup_environment()
+        bt.logging.info(f'.................Environment setup complete')
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        bt.logging.info(f'.................Device: {self.device}')
         self.model = self._load_model()
+        bt.logging.info(f'.................Model loaded')
         self.speaker_ids = self.model.hps.data.spk2id
+        bt.logging.info(f'.................Speaker IDs: {self.speaker_ids}')
 
     def _setup_environment(self):
+        bt.logging.info(f'.................Setting up environment for MeloTTS')
         # Check if MeloTTS directory exists in the current working directory
         melo_dir = os.path.join(os.getcwd(), 'MeloTTS')
+        bt.logging.info(f'.................MeloTTS directory: {melo_dir}')
         if not os.path.isdir(melo_dir):
             os.system('git clone https://github.com/myshell-ai/MeloTTS.git')
             os.system('python -m unidic download')
+            bt.logging.info(f'.................MeloTTS directory cloned')
 
         # Dynamically add the MeloTTS directory to sys.path
         sys.path.append(melo_dir)

@@ -25,7 +25,6 @@ passlib==1.7.4
 psycopg2-binary==2.9.9
 python-jose==3.3.0
 inflect
-
 cached_path 
 gruut[de,es,fr]==2.2.3
 pykakasi==2.2.1 

@@ -80,7 +80,7 @@ class MeloTTS:
         sys.path.append('/root/tts_imp/MeloTTS/')
 
     def _load_model(self):
-        from melo.api import TTS
+        from MeloTTS.melo.api import TTS
         return TTS(language='EN', device=str(self.device))
     def generate_speech(self, text_input):
         speech = self.model.tts_to_file(text_input, self.speaker_ids['EN-US'])

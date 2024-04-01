@@ -95,6 +95,7 @@ class MeloTTS:
 
         # Dynamically add the MeloTTS directory to sys.path
         sys.path.append(melo_dir)
+        bt.logging.info(f'Added MeloTTS directory to sys.path: {melo_dir}')
 
     def _load_model(self):
         from melo.api import TTS

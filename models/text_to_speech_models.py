@@ -90,8 +90,7 @@ class MeloTTS:
 
         # Add the project root and 'AudioSubnet' directories to sys.path with MeloTTS directory
         sys.path.insert(0, os.path.abspath('MeloTTS'))
-        bt.logging.info(f'..........audio subnet path{audio_subnet_path}')
-        bt.logging.info(f'..........project root path{project_root}')
+        bt.logging.info(f'..........audio subnet path{sys.path.insert(0, os.path.abspath('MeloTTS'))}')
 
     def _load_model(self):
         from melo.api import TTS

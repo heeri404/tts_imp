@@ -77,24 +77,29 @@ class ElevenLabsTTS:
             return audio
         except Exception as e:
             print(f"An error occurred while processing the input audio in 11 Labs: {e}")
+
 class MeloTTS:
-    def __init__(self, model_path="myshell-ai/MeloTTS-English"):
+    def _init_(self, model_path="myshell-ai/MeloTTS-English"):
+        self.model_path = model_path
         self._setup_environment()
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model = self._load_model()
         self.speaker_ids = self.model.hps.data.spk2id
+
     def _setup_environment(self):
-        if not os.path.isdir('MeloTTS'):
+        # Check if MeloTTS directory exists in the current working directory
+        melo_dir = os.path.join(os.getcwd(), 'MeloTTS')
+        if not os.path.isdir(melo_dir):
             os.system('git clone https://github.com/myshell-ai/MeloTTS.git')
             os.system('python -m unidic download')
 
-        # Add the project root and 'AudioSubnet' directories to sys.path with MeloTTS directory
-        sys.path.insert(0, os.path.abspath('MeloTTS'))
-        bt.logging.info(f'..........audio subnet path{sys.path.insert(0, os.path.abspath('MeloTTS'))}')
+        # Dynamically add the MeloTTS directory to sys.path
+        sys.path.append(melo_dir)
 
     def _load_model(self):
         from melo.api import TTS
         return TTS(language='EN', device=str(self.device))
+
     def generate_speech(self, text_input):
         speech = self.model.tts_to_file(text_input, self.speaker_ids['EN-US'])
         return speech
